@@ -16,16 +16,21 @@ PWA 本身强调渐进式，并不要求一次性达到安全、性能和体验�
    <!-- 在index.html中添加以下meta标签 -->
    <link rel="manifest" href="/manifest.json">
    ```
-   
+   * 浏览器兼容
+   ![浏览器兼容](./pwa-imgs/maifes.webp)
 2. Service Worker
-
-3. Cache API 缓存
-
-4. Push & Notification 推送与通知
-
-5. Background Sync 后台同步
-
-6. 响应式设计
+  * 一个独立于前端页面，在后台运行的进程。
+  * 让我们的Web App在无网（offline）情况下可以访问，甚至使用部分功能，而不是展示“无网络连接”的错误页。
+  * 让我们在弱网的情况下，能使用缓存快速访问我们的应用，提升体验。
+  * 在正常的网络情况下，也可以通过各种自发控制的缓存方式来节省部分请求带宽
+  * 浏览器兼容
+   ![浏览器兼容](./pwa-imgs/service-worker.webp)
+3. Push & Notification 推送与通知
+  * 可以通过这两个API推送消息
+  * 浏览器可以向push server发起订阅，订阅后将订阅信息发送给服务端，服务端根据Web Push 协议通知Push Service, Push Server 效验后推送给已订阅的客户端
+   ![push](./pwa-imgs/push-flow.webp)
+  * 浏览器兼容
+   ![浏览器兼容](./pwa-imgs/push.webp)
 
 # 可靠
 当用户打开我们站点时（从桌面 icon 或者从浏览器），通过 [Service Worker](https://developers.google.cn/web/fundamentals/primers/service-workers/) 能够让用户在网络条件很差的情况下也能瞬间加载并且展现。
