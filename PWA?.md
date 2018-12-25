@@ -10,8 +10,8 @@ PWA 本身强调渐进式，并不要求一次性达到安全、性能和体验�
 
 # PWA中的一些技术
 1. Web App Mainfest
-   Manifest 的目的是将Web应用程序安装到设备的主屏幕，为用户提供更快的访问和更丰富的体验。
-   Manifest是一个JSON格式的文件，一个指定了Web App桌面图标、名称、开屏图标、运行模式等一系列资源的一个清单。
+  * Manifest 的目的是将Web应用程序安装到设备的主屏幕，为用户提供更快的访问和更丰富的体验。
+  * Manifest是一个JSON格式的文件，一个指定了Web App桌面图标、名称、开屏图标、运行模式等一系列资源的一个清单。
    ```
    <!-- 在index.html中添加以下meta标签 -->
    <link rel="manifest" href="/manifest.json">
