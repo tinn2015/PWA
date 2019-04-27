@@ -16,6 +16,7 @@ PWA 本身强调渐进式，并不要求一次性达到安全、性能和体验�
    <!-- 在index.html中添加以下meta标签 -->
    <link rel="manifest" href="/manifest.json">
    ```
+   ![图样](./pwa-imgs/maifes2.webp)
    * 浏览器兼容
    ![浏览器兼容](./pwa-imgs/maifes.webp)
 2. Service Worker
