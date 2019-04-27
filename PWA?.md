@@ -8,31 +8,6 @@ PWA 的主要特点包括下面三点：
 * 粘性 - 像设备上的原生应用，具有沉浸式的用户体验，用户可以添加到桌面
 PWA 本身强调渐进式，并不要求一次性达到安全、性能和体验上的所有要求，开发者可以通过 [PWA Checklist](https://developers.google.cn/web/progressive-web-apps/checklist) 查看现有的特征。
 
-# PWA中的一些技术
-1. Web App Mainfest
-  * Manifest 的目的是将Web应用程序安装到设备的主屏幕，为用户提供更快的访问和更丰富的体验。
-  * Manifest是一个JSON格式的文件，一个指定了Web App桌面图标、名称、开屏图标、运行模式等一系列资源的一个清单。
-   ```
-   <!-- 在index.html中添加以下meta标签 -->
-   <link rel="manifest" href="/manifest.json">
-   ```
-   ![图样](./pwa-imgs/maifes2.webp)
-   * 浏览器兼容
-   ![浏览器兼容](./pwa-imgs/maifes.webp)
-2. Service Worker
-  * 一个独立于前端页面，在后台运行的进程。
-  * 让我们的Web App在无网（offline）情况下可以访问，甚至使用部分功能，而不是展示“无网络连接”的错误页。
-  * 让我们在弱网的情况下，能使用缓存快速访问我们的应用，提升体验。
-  * 在正常的网络情况下，也可以通过各种自发控制的缓存方式来节省部分请求带宽
-  * 浏览器兼容
-   ![浏览器兼容](./pwa-imgs/service-worker.webp)
-3. Push & Notification 推送与通知
-  * 可以通过这两个API推送消息
-  * 浏览器可以向push server发起订阅，订阅后将订阅信息发送给服务端，服务端根据Web Push 协议通知Push Service, Push Server 效验后推送给已订阅的客户端
-   ![push](./pwa-imgs/push-flow.webp)
-  * 浏览器兼容
-   ![浏览器兼容](./pwa-imgs/push.webp)
-
 # 可靠
 当用户打开我们站点时（从桌面 icon 或者从浏览器），通过 [Service Worker](https://developers.google.cn/web/fundamentals/primers/service-workers/) 能够让用户在网络条件很差的情况下也能瞬间加载并且展现。
 
@@ -74,6 +49,32 @@ PWA 是对站点体验的一个飞跃式的提升，我们会从安全、性能�
 1. 游览器对技术支持还不够全面， 不是每一款游览器都能100%的支持所有PWA
 2. 需要通过第三方库才能调用底层硬件（如摄像头）
 3. PWA现在还没那么火，国内一些手机生产上在Android系统上做了手脚，似乎屏蔽了PWA, 但是相信当PWA火起来以后，这个问题就不会是问题
+
+# PWA中的一些技术
+
+1. Web App Mainfest
+  * Manifest 的目的是将Web应用程序安装到设备的主屏幕，为用户提供更快的访问和更丰富的体验。
+  * Manifest是一个JSON格式的文件，一个指定了Web App桌面图标、名称、开屏图标、运行模式等一系列资源的一个清单。
+   ```
+   <!-- 在index.html中添加以下meta标签 -->
+   <link rel="manifest" href="/manifest.json">
+   ```
+   ![图样](./pwa-imgs/maifes2.webp)
+   * 浏览器兼容
+   ![浏览器兼容](./pwa-imgs/maifes.webp)
+2. Service Worker
+  * 一个独立于前端页面，在后台运行的进程。
+  * 让我们的Web App在无网（offline）情况下可以访问，甚至使用部分功能，而不是展示“无网络连接”的错误页。
+  * 让我们在弱网的情况下，能使用缓存快速访问我们的应用，提升体验。
+  * 在正常的网络情况下，也可以通过各种自发控制的缓存方式来节省部分请求带宽
+  * 浏览器兼容
+   ![浏览器兼容](./pwa-imgs/service-worker.webp)
+3. Push & Notification 推送与通知
+  * 可以通过这两个API推送消息
+  * 浏览器可以向push server发起订阅，订阅后将订阅信息发送给服务端，服务端根据Web Push 协议通知Push Service, Push Server 效验后推送给已订阅的客户端
+   ![push](./pwa-imgs/push-flow.webp)
+  * 浏览器兼容
+   ![浏览器兼容](./pwa-imgs/push.webp)
 
 # Service Worker和HTTP缓存
 1、改写默认行为。
