@@ -121,6 +121,25 @@ PWA 是对站点体验的一个飞跃式的提升，我们会从安全、性能�
    ### 4.icons， background_color
    定义应用程序的默认主题颜色。 这有时会影响操作系统显示应用程序的方式（例如，在Android的任务切换器上，主题颜色包围应用程序）。此外，还可以在meta标签中设置theme_color：<meta name="theme-color" content="#5eace0"/>
    
+### safari,ie
+safari与ie中，可以通过一些特有的meta、link标签来实现
+* safari
+```
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="图书搜索">
+<link rel="apple-touch-icon" href="img/icons/book-256.png">
+```
+
+* ie
+```
+<meta name="application-name" content="图书搜索" />
+<meta name="msapplication-TileColor" content="#222">
+<meta name="msapplication-square70x70logo" content="img/icons/book-72.png" />
+<meta name="msapplication-square150x150logo" content="img/icons/book-144.png" />
+<meta name="msapplication-square310x310logo" content="img/icons/book-256.png" />
+```
+
 ## 2. Service Worker
   * 一个独立于前端页面，在后台运行的进程。
   * 让我们的Web App在无网（offline）情况下可以访问，甚至使用部分功能，而不是展示“无网络连接”的错误页。
