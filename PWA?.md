@@ -104,13 +104,13 @@ PWA 是对站点体验的一个飞跃式的提升，我们会从安全、性能�
     }]
 }
    ```
-   ### name, short_name
+   ### 1.name, short_name
    指定了Web App的名称。short_name其实是该应用的一个简称。一般来说，当没有足够空间展示应用的name时，系统就会使用short_name。可以看到本文的例子中，    图书搜索这个应用在桌面上展示的名称就是short_name书查
    
-   ### start_url
+   ### 2.start_url
    这个属性指定了用户打开该Web App时加载的URL。相对URL会相对于manifest。这里我们指定了start_url为/，访问根目录。
    
-   ### display
+   ### 3.display
    display控制了应用的显示模式，它有四个值可以选择：fullscreen、standalone、minimal-ui和browser。
    
    * fullscreen：全屏显示，会尽可能将所有的显示区域都占满；
@@ -118,7 +118,7 @@ PWA 是对站点体验的一个飞跃式的提升，我们会从安全、性能�
    * minimal-ui：与standalone相比，该模式会多出地址栏；
    * browser：一般来说，会和正常使用浏览器打开样式一致。
    
-   ### icons， background_color
+   ### 4.icons， background_color
    定义应用程序的默认主题颜色。 这有时会影响操作系统显示应用程序的方式（例如，在Android的任务切换器上，主题颜色包围应用程序）。此外，还可以在meta标签中设置theme_color：<meta name="theme-color" content="#5eace0"/>
    
 ## 2. Service Worker
