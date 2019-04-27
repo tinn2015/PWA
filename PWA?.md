@@ -92,7 +92,9 @@ HTTP缓存空间有限，容易被冲掉。虽然部分浏览器实现SW的存�
 5、离线处理。
 当监测到离线，而且又没有缓存某个图片时，可以做特殊处理，返回离线的提示。又或者做一个纯前端的404/断网页面。类似Chrome的小恐龙页面。
 
-
+# 参考
 [lavas](https://lavas.baidu.com/pwa/README)
 
 [Service Worker 应用详解](https://lzw.me/a/pwa-service-worker.html)
+
+[pwa demo](https://www.jianshu.com/p/098af61bbe04)
