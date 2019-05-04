@@ -154,6 +154,10 @@ safari与ie中，可以通过一些特有的meta、link标签来实现
 ### 主要原理
 你可以在Service Worker中监听所有客户端（Web）发出的请求，然后通过Service Worker来代理，向后端服务发起请求。通过监听用户请求信息，Service Worker可以决定是否使用缓存来作为Web请求的返回。
 
+![浏览器请求](./pwa-imgs/web.webp)
+
+![Service Worker代理](./pwa-imgs/sw.webp)
+
 ## 3. Push & Notification 推送与通知
   * 可以通过这两个API推送消息
   * 浏览器可以向push server发起订阅，订阅后将订阅信息发送给服务端，服务端根据Web Push 协议通知Push Service, Push Server 效验后推送给已订阅的客户端
