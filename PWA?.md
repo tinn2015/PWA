@@ -141,7 +141,7 @@ safari与ie中，可以通过一些特有的meta、link标签来实现
 ```
 
 ## 2. Service Worker
-可以把Service Worker简单理解为一个独立于前端页面，在后台运行的进程。因此，它不会阻塞浏览器脚本的运行，同时也无法直接访问浏览器相关的API（例如：DOM、localStorage等）。此外，即使在离开你的Web App，甚至是关闭浏览器后，它仍然可以运行。它就像是一个在Web应用背后默默工作的勤劳小蜜蜂，处理着缓存、推送、通知与同步等工作。所以，要学习PWA，绕不开的就是Service Worker。
+可以把Service Worker简单理解为一个独立于前端页面，在后台运行的进程。因此，它不会阻塞浏览器脚本的运行，同时也无法直接访问浏览器相关的API（例如：DOM、localStorage等）。Service Worker 最主要的特点是：在页面中注册并安装成功后，运行于浏览器后台，不受页面刷新的影响，可以监听和截拦作用域范围内所有页面的 HTTP 请求。基于 Service Worker API 的特性，结合 Fetch API、Cache API、Push API、postMessage API 和 Notification API，可以在基于浏览器的 web 应用中实现如离线缓存、消息推送、静默更新等 native 应用常见的功能，以给 web 应用提供更好更丰富的使用体验
 
 ### 特性
   * 一个独立于前端页面，在后台运行的进程。
@@ -150,7 +150,11 @@ safari与ie中，可以通过一些特有的meta、link标签来实现
   * 在正常的网络情况下，也可以通过各种自发控制的缓存方式来节省部分请求带宽
   * 浏览器兼容
    ![浏览器兼容](./pwa-imgs/service-worker.webp)
-3. Push & Notification 推送与通知
+   
+### 主要原理
+你可以在Service Worker中监听所有客户端（Web）发出的请求，然后通过Service Worker来代理，向后端服务发起请求。通过监听用户请求信息，Service Worker可以决定是否使用缓存来作为Web请求的返回。
+
+## 3. Push & Notification 推送与通知
   * 可以通过这两个API推送消息
   * 浏览器可以向push server发起订阅，订阅后将订阅信息发送给服务端，服务端根据Web Push 协议通知Push Service, Push Server 效验后推送给已订阅的客户端
    ![push](./pwa-imgs/push-flow.webp)
