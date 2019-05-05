@@ -156,6 +156,19 @@ safari与ie中，可以通过一些特有的meta、link标签来实现
 
 ![浏览器请求](./pwa-imgs/web.webp)  
 
+### Service Worker 生命周期
+整个生命周期包括了：installing --> installed --> activating --> activated --> redundant。当Service Worker安装（installed）完毕后，会触发install事件；而激活（activated）后，则会触发activate事件。
+```
+// 监听install事件
+self.addEventListener('install', function (e) {
+    console.log('Service Worker 状态： install');
+});
+```
+
+### 缓存策略
+![缓存策略](./pwa-imgs/cache.webp)
+
+
 ## 3. Push & Notification 推送与通知
   * 可以通过这两个API推送消息
   * 浏览器可以向push server发起订阅，订阅后将订阅信息发送给服务端，服务端根据Web Push 协议通知Push Service, Push Server 效验后推送给已订阅的客户端
@@ -187,4 +200,4 @@ HTTP缓存空间有限，容易被冲掉。虽然部分浏览器实现SW的存�
 
 [Service Worker 应用详解](https://lzw.me/a/pwa-service-worker.html)
 
-[pwa demo](https://www.jianshu.com/p/098af61bbe04)
+[PWA学习与实践](https://www.jianshu.com/p/25331bf16543)
