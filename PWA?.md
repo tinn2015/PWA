@@ -174,6 +174,7 @@ self.addEventListener('install', function (e) {
 3. 若存在cache则直接返回，结束；
 4. 若不存在cache，则通过fetch方法向服务端发起请求，并返回请求结果给浏览器
 
+fetch事件会监听所有浏览器的请求。e.respondWith()方法接受Promise作为参数，通过它让Service Worker向浏览器返回数据。caches.match(e.request)则可以查看当前的请求是否有一份本地缓存：如果有缓存，则直接向浏览器返回cache；否则Service Worker会向后端服务发起一个fetch(e.request)的请求，并将请求结果返回给浏览器。
 
 ## 3. Push & Notification 推送与通知
   * 可以通过这两个API推送消息
