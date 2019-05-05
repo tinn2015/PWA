@@ -176,6 +176,28 @@ self.addEventListener('install', function (e) {
 
 fetch事件会监听所有浏览器的请求。e.respondWith()方法接受Promise作为参数，通过它让Service Worker向浏览器返回数据。caches.match(e.request)则可以查看当前的请求是否有一份本地缓存：如果有缓存，则直接向浏览器返回cache；否则Service Worker会向后端服务发起一个fetch(e.request)的请求，并将请求结果返回给浏览器。
 
+```
+// sw.js
+self.addEventListener('fetch', function (e) {
+    // 如果有cache则直接返回，否则通过fetch请求
+    e.respondWith(
+        caches.match(e.request).then(function (cache) {
+            return cache || fetch(e.request);
+        }).catch(function (err) {
+            console.log(err);
+            return fetch(e.request);
+        })
+    );
+});
+```
+
+### 更新静态资源
+由于浏览器判断sw.js是否更新是通过字节方式，因此修改cacheName会重新触发install并缓存资源。此外，在activate事件中，我们需要检查cacheName是否变化，如果变化则表示有了新的缓存资源，原有缓存需要删除。
+
+### 缓存请求数据
+需要把XHR请求的数据缓存一份，而再次请求时，我们会优先使用本地缓存（如果有缓存的话）；然后向服务端请求数据，服务端返回数据后，基于该数据替换展示。
+![缓存策略](./pwa-imgs/xhr.webp)
+
 ## 3. Push & Notification 推送与通知
   * 可以通过这两个API推送消息
   * 浏览器可以向push server发起订阅，订阅后将订阅信息发送给服务端，服务端根据Web Push 协议通知Push Service, Push Server 效验后推送给已订阅的客户端
