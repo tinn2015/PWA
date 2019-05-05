@@ -169,6 +169,12 @@ self.addEventListener('install', function (e) {
 ![缓存策略](./pwa-imgs/cache.webp)
 ![缓存策略](./pwa-imgs/cache2.webp)
 
+1. 浏览器发起请求，请求各类静态资源（html/js/css/img）；
+2. Service Worker拦截浏览器请求，并查询当前cache；
+3. 若存在cache则直接返回，结束；
+4. 若不存在cache，则通过fetch方法向服务端发起请求，并返回请求结果给浏览器
+
+
 ## 3. Push & Notification 推送与通知
   * 可以通过这两个API推送消息
   * 浏览器可以向push server发起订阅，订阅后将订阅信息发送给服务端，服务端根据Web Push 协议通知Push Service, Push Server 效验后推送给已订阅的客户端
