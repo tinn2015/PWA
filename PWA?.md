@@ -167,7 +167,7 @@ self.addEventListener('install', function (e) {
 
 ### 缓存策略
 ![缓存策略](./pwa-imgs/cache.webp)
-
+![缓存策略](./pwa-imgs/cache2.webp)
 
 ## 3. Push & Notification 推送与通知
   * 可以通过这两个API推送消息
