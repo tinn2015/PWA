@@ -269,6 +269,15 @@ function queryBook() {
     // ……
 }
 ```
+### 使用Service Worker 进行后台同步
+![sync](./pwa-imgs/sync.webp)
+由于Service Worker在用户关闭该网站后仍可以运行, 所以可以维持住 该请求，以待有网情况下再进行请求。
+1. 你需要在Service Worker中监听sync事件；
+2. 在浏览器中发起后台同步sync（图中第一步）；
+3. 会触发Service Worker的sync事件，在该监听的回调中进行操作，例如向后端发起请求（图中第二步）
+4. 可以在Service Worker中对服务端返回的数据进行处理。
+
+由于Service Worker在用户关闭该网站后仍可以运行，因此该流程名为“后台同步”实在是非常贴切。
 
 ### Service Worker和HTTP缓存
 1、改写默认行为。
