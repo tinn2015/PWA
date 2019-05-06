@@ -270,15 +270,6 @@ function queryBook() {
 }
 ```
 
-## 3. Push & Notification 推送与通知
-  * 可以通过这两个API推送消息
-  * 浏览器可以向push server发起订阅，订阅后将订阅信息发送给服务端，服务端根据Web Push 协议通知Push Service, Push Server 效验后推送给已订阅的客户端
-   ![push](./pwa-imgs/push-flow.webp)
-  * 浏览器兼容
-   ![浏览器兼容](./pwa-imgs/push.webp)
-   
-### service 是如何离线可用的？
-
 ### Service Worker和HTTP缓存
 1、改写默认行为。
 例如，浏览器默认在刷新时，会对所有资源都重新发起请求，即使缓存还是有效期内，而使用了SW，就可以改写这个行为，直接返回缓存。
@@ -295,6 +286,16 @@ HTTP缓存空间有限，容易被冲掉。虽然部分浏览器实现SW的存�
 
 5、离线处理。
 当监测到离线，而且又没有缓存某个图片时，可以做特殊处理，返回离线的提示。又或者做一个纯前端的404/断网页面。类似Chrome的小恐龙页面。
+
+## 3. Push & Notification 推送与通知
+  * 可以通过这两个API推送消息
+  * 浏览器可以向push server发起订阅，订阅后将订阅信息发送给服务端，服务端根据Web Push 协议通知Push Service, Push Server 效验后推送给已订阅的客户端
+   ![push](./pwa-imgs/push-flow.webp)
+  * 浏览器兼容
+   ![浏览器兼容](./pwa-imgs/push.webp)
+   
+### service 是如何离线可用的？
+
 
 # 参考
 [lavas](https://lavas.baidu.com/pwa/README)
