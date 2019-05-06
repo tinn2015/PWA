@@ -318,13 +318,98 @@ HTTP缓存空间有限，容易被冲掉。虽然部分浏览器实现SW的存�
 #### Push Message，然后是推送：
 1. Push Message阶段一：我们的服务端需要推送消息时，不直接和客户端交互，而是通过Web Push协议，将相关信息通知Push Service；
 2. Push Message阶段二：Push Service收到消息，通过校验后，基于其维护的客户端信息，将消息推送给订阅了的客户端；
-3.最后，客户端收到消息，完成整个推送过程。
+3. 最后，客户端收到消息，完成整个推送过程。
 ![push](./pwa-imgs/push-flow.webp)
    
-  * 浏览器兼容
-   ![浏览器兼容](./pwa-imgs/push.webp)
-   
-### service 是如何离线可用的？
+#### 什么是 Push Service
+Push Service可以接收网络请求，校验该请求并将其推送给合适的浏览器客户端。Push Service还有一个非常重要的功能：当用户离线时，可以帮我们保存消息队列，直到用户联网后再发送给他们。
+
+目前，不同的浏览器厂商使用了不同的Push Service。例如，chrome使用了google自家的FCM（前身为GCM），firefox也是使用自家的服务。那么我们是否需要写不同的代码来兼容不同的浏览器所使用的服务呢？答案是并不用。Push Service遵循Web Push Protocol，其规定了请求及其处理的各种细节，这就保证了，不同的Push Service也会具有标准的调用方式。
+
+这里再提一点：我们在上一节中说了Push的标准流程，其中第一步就是浏览器发起订阅，生成一个PushSubscription对。Push Service会为每个发起订阅的浏览器生成一个唯一的URL，这样，我们在服务端推送消息时，向这个URL进行推送后，Push Service就会知道要通知哪个浏览器。而这个URL信息也在PushSubscription对象里，叫做endpoint。
+
+#### Push 安全性
+在Web Push中会有一对公钥与私钥。客户端持有公钥，而服务端持有私钥。客户端在订阅时，会将公钥发送给Push Service，而Push Service会将该公钥与相应的endpoint维护起来。而当服务端要推送消息时，会使用私钥对发送的数据进行数字签名，并根据数字签名生成一个叫】Authorization请求头。Push Service收到请求后，根据endpoint取到公钥，对数字签名解密验证，如果信息相符则表明该请求是通过对应的私钥加密而成，也表明该请求来自浏览器所订阅的服务端。反之亦然。
+
+#### Service Worker 监听Push消息
+
+```
+// sw.js
+self.addEventListener('push', function (e) {
+    var data = e.data;
+    if (e.data) {
+        data = data.json();
+        console.log('push的数据为：', data);
+        self.registration.showNotification(data.text);        
+    } 
+    else {
+        console.log('push没有任何数据');
+    }
+});
+```
+#### 通知
+先获取提醒权限
+```
+// index.js
+function askPermission() {
+    return new Promise(function (resolve, reject) {
+        var permissionResult = Notification.requestPermission(function (result) {
+            resolve(result);
+        });
+  
+        if (permissionResult) {
+            permissionResult.then(resolve, reject);
+        }
+    }).then(function (permissionResult) {
+        if (permissionResult !== 'granted') {
+            throw new Error('We weren\'t granted permission.');
+        }
+    });
+}
+
+
+registerServiceWorker('./sw.js').then(function (registration) {
+    return Promise.all([
+        registration,
+        askPermission()
+    ])
+ })
+```
+
+设置提醒内容
+```
+// index.js
+registerServiceWorker('./sw.js').then(function (registration) {
+    return Promise.all([
+        registration,
+        askPermission()
+    ])
+}).then(function (result) {
+    var registration = result[0];
+    /* ===== 添加提醒功能 ====== */
+    document.querySelector('#js-notification-btn').addEventListener('click', function () {
+        var title = 'PWA即学即用';
+        var options = {
+            body: '邀请你一起学习',
+            icon: '/img/icons/book-128.png',
+            actions: [{
+                action: 'show-book',
+                title: '去看看'
+            }, {
+                action: 'contact-me',
+                title: '联系我'
+            }],
+            tag: 'pwa-starter',
+            renotify: true
+        };
+        registration.showNotification(title, options);
+    });
+    /* ======================= */
+})
+
+```
+获取用户授权后，我们就可以通过registration.showNotification()方法进行消息提醒了。
+当我们注册完Service Worker后，then方法的回调函数会接收一个registration参数，通过调用其上的showNotification()方法即可触发提醒
 
 
 # 参考
